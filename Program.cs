@@ -9,7 +9,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>(options => {
+builder.Services.AddDbContext<AppDbContext>(options =>{
     // Retrieve the connection string from appsettings.json
     string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
