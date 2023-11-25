@@ -1,4 +1,4 @@
-﻿namespace eShop.Controllers.Data.Enums
+﻿namespace eShop.Data.Enums
 {
     public enum productCategory
     {

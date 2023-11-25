@@ -1,12 +1,12 @@
 ﻿using eShop.Models;
 
-namespace eShop.Controllers.Data
+namespace eShop.Data
 {
     public class AppDbInitializer
     {
         public static void seed(IApplicationBuilder applicationBuilder)
         {
-            using(var serviceScope=applicationBuilder.ApplicationServices.CreateScope()) 
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.EnsureCreated();
@@ -15,8 +15,8 @@ namespace eShop.Controllers.Data
                 {
                     context.Products.AddRange(new List<product>()
 
-                        
-                        
+
+
                         );
                     context.SaveChanges();
 
@@ -29,9 +29,9 @@ namespace eShop.Controllers.Data
                         {
                             store_Id = 1002,
                             store_Name = "Def_store",
-                            store_PinCode = "100445", 
+                            store_PinCode = "100445",
                             store_isOpen = "y"
-                        }                        
+                        }
                     }
 
 
