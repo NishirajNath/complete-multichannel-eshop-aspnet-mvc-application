@@ -7,14 +7,14 @@ namespace eShop.Models
     public class product
     {
         [Key]
-        public int product_UPC { get; set; }
+        public long product_UPC { get; set; }
         public string product_imageUrl { get; set; }
         public string product_name { get; set;}
         public string product_description { get; set;}
         public string product_unitPrice { get; set;} 
         public productCategory product_category { get; set;}
         public string product_unitOfMeasurement { get; set;}
-        public int product_id { get; set;}
+        public long product_id { get; set;}
         public string product_brand { get; set;}
         public string product_inStock { get; set;}
         public string product_expirationDate { get; set; }

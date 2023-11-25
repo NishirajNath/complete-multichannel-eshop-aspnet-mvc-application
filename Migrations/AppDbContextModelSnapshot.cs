@@ -43,7 +43,7 @@ namespace eShop.Migrations
 
                     b.HasKey("store_Id");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
                 });
 
             modelBuilder.Entity("eShop.Models.product", b =>
@@ -107,7 +107,7 @@ namespace eShop.Migrations
 
                     b.HasIndex("store_Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("eShop.Models.product", b =>
