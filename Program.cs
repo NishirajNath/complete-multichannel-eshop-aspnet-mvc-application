@@ -1,7 +1,21 @@
+using eShop.Controllers.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(options => {
+    // Retrieve the connection string from appsettings.json
+    string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    // UseSqlServer with the retrieved connection string
+    options.UseSqlServer(connectionString);
+});
 
 var app = builder.Build();
 
