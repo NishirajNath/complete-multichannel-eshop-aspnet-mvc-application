@@ -1,5 +1,7 @@
 using eShop.Data;
 using Microsoft.EntityFrameworkCore;
+using eShop.Controllers;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,14 +33,18 @@ if (!app.Environment.IsDevelopment())
 AppDbInitializer.seed(app);
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}" );
+
+
 
 app.Run();
