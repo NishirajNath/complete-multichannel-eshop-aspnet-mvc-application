@@ -1,70 +1,97 @@
 ﻿@model IEnumerable<product>
 
-    
+@{
+    ViewData["Title"] = "Products";
+}    
+<style>
+    /* Add your custom styles here */
 
+    .plp-box {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
+    .plp-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .plp-details {
+        padding: 16px;
+    }
+
+    .plp-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .plp-price {
+        font-size: 16px;
+        color: #e44d26;
+        margin-bottom: 8px;
+    }
+
+    .plp-offers {
+        font-size: 14px;
+        color: #28a745;
+        margin-bottom: 8px;
+    }
+
+    .plp-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .plp-button {
+        padding: 8px;
+        text-align: center;
+        width: 48%;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .plp-stock {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .out-of-stock {
+        color: #dc3545; /* Red color for out of stock */
+        font-weight: bold;
+    }
+</style>
 
 <div class="row">
-    <div class="col-md-9 offset-md-1">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.product_imageUrl)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.product_UPC)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.product_name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.product_unitPrice)
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="align-middle">
-                            <img src="" style="max-width:150">
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.product_UPC)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.product_name)
-                        </td>
-                        <td class ="align-middle">
-                            @Html.DisplayFor(modelItem => item.product_unitPrice)
-                        </td>
-                        <td class="align-middle">
-                            <a class="btn btn-outline-primary">-<i class="bi bi-plus-square"></i></a>
-                            <a class="btn btn-outline-primary">+<i class="bi bi-minus-square"></i></a>
-                        </td>
-                    </tr>
-                    
-                }
-
-            </tbody>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-
-    </div>  
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="plp-box card">
+                <img class="plp-image card-img-top" src=@item.product_imageUrl alt="product_name">
+                <div class="plp-details card-body">
+                    <div class="plp-title card-title">@item.product_name</div>
+                    <div class="plp-price card-text">$@item.product_unitPrice</div>
+                    <div class="plp-offers card-text">OFFER: @item.product_promotion</div>
+                    <div class="plp-stock card-text">
+                        @if (@item.product_inStock != "0")
+                        {
+                            <span>Available</span>
+                        }
+                        else
+                        {
+                            <span>OUT OF STOCK</span>
+                        }
+                    </div>
+                    <div class="plp-buttons">
+                        <button class="plp-button btn btn-primary" onclick="addToCart('@item.product_UPC')">Add to Cart</button>
+                        <a class="plp-button btn btn-secondary" href="@Url.Action("Details", "Product", new { id = item.product_UPC })">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-
-
-
-<!-- Views/Products/Index.cshtml -->
-<h2>Products Page</h2>
-<p>Welcome to the Products page!</p>
