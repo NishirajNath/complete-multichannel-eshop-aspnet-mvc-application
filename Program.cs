@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using eShop.Controllers;
 using Microsoft.AspNetCore.Builder;
 using eShop.Data.Services;
+using Azure;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,3 +53,5 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+

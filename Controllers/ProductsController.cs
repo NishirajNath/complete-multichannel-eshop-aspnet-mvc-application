@@ -36,7 +36,7 @@ namespace eShop.Controllers
         public async Task<ActionResult> Details(int id)
         {
             var productDetails = await _service.GetByIdAsync(id);
-            if (productDetails == null) return View("Empty");
+            if (productDetails == null) return View("NotFound");
             return View(productDetails);
         }
     }
