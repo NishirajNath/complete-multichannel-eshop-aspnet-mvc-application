@@ -88,7 +88,7 @@
                     </div>
                     <div class="plp-buttons">
                         <button class="plp-button btn btn-primary" onclick="addToCart('@item.product_UPC')">Add to Cart</button>
-                        <a class="plp-button btn btn-secondary" href="@Url.Action("Details", "Product", new { id = item.product_UPC })">View Details</a>
+                        <a class="plp-button btn btn-secondary" asp-controller="Products" asp-action="Details" asp-route-id="@item.product_id">View Details</a>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">eShop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -24,7 +24,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" href="#">Shop/Store</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Product Categories</a>
+                        </li>
+                        <li class="nav-item" style="width: 60%;">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#"><i class="bi bi-cart"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Account/Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#"><i class="bi bi-list"></i>Shopping list</a>
                         </li>
                     </ul>
                 </div>

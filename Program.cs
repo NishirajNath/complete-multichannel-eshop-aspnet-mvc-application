@@ -2,6 +2,7 @@ using eShop.Data;
 using Microsoft.EntityFrameworkCore;
 using eShop.Controllers;
 using Microsoft.AspNetCore.Builder;
+using eShop.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>{
     // UseSqlServer with the retrieved connection string
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddScoped<IProductsService, productsService>();
 
 var app = builder.Build();
 

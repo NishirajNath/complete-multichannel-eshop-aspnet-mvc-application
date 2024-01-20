@@ -1,0 +1,38 @@
+﻿@model product
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<div class="container mt-5">
+    <h2>@Model.product_name</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.product_imageUrl" alt="Product Image" class="img-fluid" />
+        </div>
+
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.product_description)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.product_description)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.product_unitPrice)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.product_unitPrice)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.product_category)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.product_category)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.product_unitOfMeasurement)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.product_unitOfMeasurement)</dd>
+
+
+
+                <!-- Add more store-related fields as needed -->
+            </dl>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap CSS (make sure to include the appropriate Bootstrap version) -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
