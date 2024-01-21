@@ -32,6 +32,18 @@ namespace eShop.Controllers
             return View(allProducts);
         }
 
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allProducts = await _service.GetAll();
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allProducts.Where(n=> n.product_name.Contains(searchString) || n.product_description.Contains(searchString)).ToList();
+                return View("Index", filteredResult);
+            }
+            
+            return View("Index", allProducts);
+        }
+
         // Get: Products/Details/id
         public async Task<ActionResult> Details(int id)
         {
