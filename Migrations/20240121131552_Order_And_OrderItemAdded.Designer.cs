@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShop.Data;
 
@@ -10,9 +11,11 @@ using eShop.Data;
 namespace eShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121131552_Order_And_OrderItemAdded")]
+    partial class Order_And_OrderItemAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,31 +91,6 @@ namespace eShop.Migrations
                     b.HasIndex("product_id");
 
                     b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("eShop.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("cartItem_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cartItem_Id"));
-
-                    b.Property<string>("ShoppingCartId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("cartItem_Quantitiy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("product_UPC")
-                        .HasColumnType("int");
-
-                    b.HasKey("cartItem_Id");
-
-                    b.HasIndex("product_UPC");
-
-                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("eShop.Models.Store", b =>
@@ -219,17 +197,6 @@ namespace eShop.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
-
-                    b.Navigation("product");
-                });
-
-            modelBuilder.Entity("eShop.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("eShop.Models.product", "product")
-                        .WithMany()
-                        .HasForeignKey("product_UPC")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("product");
                 });
