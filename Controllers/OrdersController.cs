@@ -14,7 +14,7 @@ namespace eShop.Controllers
             _productsService = productsService;
             _shoppingCart = shoppingCart;
         }
-        public IActionResult Index()
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -24,6 +24,18 @@ namespace eShop.Controllers
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
             };
             return View(response);
+        }
+
+        public async Task<RedirectToActionResult> AddToShoppingCart(int product_id)
+        {
+            var item = await _productsService.GetByIdAsync(product_id);
+
+            if (item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            
+            return RedirectToAction(nameof(ShoppingCart));
         }
     }
 }

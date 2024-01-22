@@ -16,6 +16,16 @@ namespace eShop.Data.Cart
         {
             _context = context;
         }
+
+        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = services.GetService<AppDbContext>();
+            string CartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", CartId);
+
+            return new ShoppingCart(context) { ShoppingCartId = CartId };
+        }
         public void AddItemToCart(product product) 
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.product.product_id == product.product_id && n.ShoppingCartId == ShoppingCartId);

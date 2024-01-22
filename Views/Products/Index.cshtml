@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<product>
 
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "products";
 }    
 <style>
     /* Add your custom styles here */
@@ -87,7 +87,7 @@
                         }
                     </div>
                     <div class="plp-buttons">
-                        <button class="plp-button btn btn-primary" onclick="addToCart('@item.product_UPC')">Add to Cart</button>
+                        <a class="plp-button btn btn-primary" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@item.product_id">Add to Cart</a>
                         <a class="plp-button btn btn-secondary" asp-controller="Products" asp-action="Details" asp-route-id="@item.product_id">View Details</a>
                     </div>
                 </div>

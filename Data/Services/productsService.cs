@@ -27,11 +27,20 @@ namespace eShop.Data.Services
             return result;
         }
 
-        public async Task<product> GetByIdAsync(int id)
+        public async Task<product> GetByIdAsync(int product_id)
         {
-            var result = await _context.Products.FirstOrDefaultAsync(n => n.product_id == id);
-            return result;
+            try
+            {
+                var result = await _context.Products.FirstOrDefaultAsync(n => n.product_id == product_id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving product by ID: {product_id}. Error: {ex.Message}");
+                throw;
+            }
         }
+
 
         public product update(int id, product newproduct)
         {

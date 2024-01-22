@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using eShop.Data.Services;
 using Azure;
 using Microsoft.AspNetCore.Mvc;
+using eShop.Data.Cart;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>{
 
 builder.Services.AddScoped<IProductsService, productsService>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,6 +49,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

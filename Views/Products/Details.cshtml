@@ -26,6 +26,8 @@
                 <dt class="col-sm-4">@Html.DisplayNameFor(model => model.product_unitOfMeasurement)</dt>
                 <dd class="col-sm-8">@Html.DisplayFor(model => model.product_unitOfMeasurement)</dd>
 
+                <button class="plp-button btn btn-primary" asp-asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="model.product_id" >Add to Cart</button>
+
 
 
                 <!-- Add more store-related fields as needed -->
