@@ -25,17 +25,34 @@ namespace eShop.Controllers
             };
             return View(response);
         }
-
-        public async Task<RedirectToActionResult> AddToShoppingCart(int product_id)
+        
+        public async Task<RedirectToActionResult> AddItemToShoppingCart(int id)
         {
-            var item = await _productsService.GetByIdAsync(product_id);
-
+            System.Diagnostics.Debug.WriteLine($"Received product_id: {id}");
+            var item = await _productsService.GetByIdAsync(id);
             if (item != null)
             {
                 _shoppingCart.AddItemToCart(item);
-            }
+                //System.Diagnostics.Debug.WriteLine("Items are added and AddItem works1");
+            }  //else { System.Diagnostics.Debug.WriteLine("AddItemToCart not working since item is null"); }  
             
             return RedirectToAction(nameof(ShoppingCart));
         }
+
+
+        
+        public async Task<RedirectToActionResult> RemoveItemToShoppingCart(int id)
+        {
+            var item = await _productsService.GetByIdAsync(id);
+
+            if (item != null)
+            {
+                _shoppingCart.RemoveItemFromCart(item);
+                //Console.WriteLine("Items are added and AddItem works1");
+            }
+            //else { Console.WriteLine("items are not added to cart"); }
+
+            return RedirectToAction(nameof(ShoppingCart));
+        } 
     }
 }

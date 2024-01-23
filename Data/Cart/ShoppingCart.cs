@@ -1,5 +1,7 @@
 ﻿using eShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eShop.Data.Cart
 {
@@ -9,7 +11,7 @@ namespace eShop.Data.Cart
 
         public string ShoppingCartId { get; set; }
         public string customer_Id { get; set; }
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
 
 
         public ShoppingCart(AppDbContext context)
@@ -19,12 +21,12 @@ namespace eShop.Data.Cart
 
         public static ShoppingCart GetShoppingCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            ISession? session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = services.GetService<AppDbContext>();
-            string CartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-            session.SetString("CartId", CartId);
+            string ShoppingCartId = session.GetString("ShoppingCartId") ?? Guid.NewGuid().ToString();
+            session.SetString("ShoppingCartId", ShoppingCartId);
 
-            return new ShoppingCart(context) { ShoppingCartId = CartId };
+            return new ShoppingCart(context) { ShoppingCartId = ShoppingCartId };
         }
         public void AddItemToCart(product product) 
         {
@@ -65,10 +67,8 @@ namespace eShop.Data.Cart
         {
             return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Include(n => n.product).ToList());
         }
-        public double GetShoppingCartTotal() 
-        {
-            var total = _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n => Convert.ToDouble(n.product.product_unitPrice) * n.cartItem_Quantitiy).Sum();
-            return total;
-        }
+        public double GetShoppingCartTotal() => _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Select(n => Convert.ToDouble(n.product.product_unitPrice) * n.cartItem_Quantitiy).Sum();
+            
+     
     }
 }

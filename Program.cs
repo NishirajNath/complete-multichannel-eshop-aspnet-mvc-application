@@ -6,14 +6,14 @@ using eShop.Data.Services;
 using Azure;
 using Microsoft.AspNetCore.Mvc;
 using eShop.Data.Cart;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configuration from appsettings.json
 builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>{
     // Retrieve the connection string from appsettings.json
@@ -30,6 +30,9 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
 builder.Services.AddSession();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
